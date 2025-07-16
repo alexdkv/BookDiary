@@ -1,0 +1,10 @@
+<p>user-details works!</p>
+<h2>Hello! This is {{currentUser?.username}} profile</h2>
+<h6>{{currentUser?.email}}</h6>
+@for (book of userBooks; track book.id) {
+    <div>
+    <h2>{{book.name}}</h2>
+    <p>{{book.author}} --- Pages: {{book.pages}}</p>
+    <p>{{book.description}}</p>
+</div>
+}

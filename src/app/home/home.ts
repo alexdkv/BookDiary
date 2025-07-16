@@ -21,16 +21,19 @@ export class Home implements OnInit{
   }
 
   public getAllBooks(): void {
-    this.bookService.getAllBooks().subscribe(
-      (response: Book[]) => {
-        this.books = response;
-        console.log(this.books);
-      },
-      (error: HttpErrorResponse) =>{
-        console.log(error.message);
-      }
-    );
-  }
+  this.bookService.getAllBooks().subscribe({
+    next: (response: Book[]) => {
+      this.books = response;
+      console.log(this.books);
+    },
+    error: (error: HttpErrorResponse) => {
+      console.error(error.message);
+    },
+    complete: () => {
+      console.log('Finished fetching books');
+    }
+  });
+}
 
 
 }
