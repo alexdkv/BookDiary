@@ -1,1 +1,8 @@
 <p>home works!</p>
+@for (book of books; track book.id) {
+    <div>
+    <h2>{{book.name}}</h2>
+    <p>{{book.author}} --- Pages: {{book.pages}}</p>
+</div>
+}
+
