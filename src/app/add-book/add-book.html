@@ -1,0 +1,66 @@
+<p>add-book works!</p>
+
+<div>
+    <form  #bookAddForm="ngForm" (ngSubmit)="onSubmit(bookAddForm)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" 
+            id="name" 
+            name="name"
+            class="form-control"
+            ngModel
+            required>
+        </div>
+        
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" 
+            id="author" 
+            name="author"
+            class="form-control"
+            ngModel
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" 
+            id="description" 
+            name="description"
+            class="form-control"
+            ngModel
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="pages">Pages</label>
+            <input type="number" 
+            id="pages" 
+            name="pages"
+            class="form-control"
+            ngModel
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="photoUrl">Book Cover</label>
+            <input type="text" 
+            id="photoUrl" 
+            name="photoUrl"
+            class="form-control"
+            ngModel
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">status</label>
+            <select class="form-control" name="status" id="status" ngModel required>
+                @for (status of bookStatus; track status) {
+                    <option [value]="status">{{ status }}</option>
+                }
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="bookAddForm.invalid">Add</button>
+    </form>
+</div>

@@ -1,5 +1,6 @@
 <div class="container" id="main-container">
     <h2>Hello! This is {{currentUser?.username}} profile</h2>
+    <a [routerLink]="['/book/addBook/user',currentUser?.id,]">Add Book</a>
     <h6>{{currentUser?.email}}</h6>
     @for (book of userBooks; track book.id) {
     <div>
