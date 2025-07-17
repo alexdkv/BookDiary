@@ -4,15 +4,19 @@ import { App } from './app';
 import { Login } from './login/login';
 import { UserDetails } from './user-details/user-details';
 import { PageNotFound } from './page-not-found/page-not-found';
+import { BookDetails } from './book-details/book-details';
+import { Register } from './register/register';
 
 export const routes: Routes = [
     {path:'', children:[
         {path:'', redirectTo:'home', pathMatch:'full'},
         {path:'home', component:Home},
-        {path:'login', component:Login},
         {path:'user/:id', redirectTo:(route) => `user/${route.params['id']}/books`, pathMatch:'full'},
-        {path:'user/:id/books', component: UserDetails}
+        {path:'user/:id/books', component: UserDetails},
+        {path:'book/:id', component:BookDetails}
     ]},
+    {path:'login', component:Login},
+    {path:'register', component:Register},
     {path:'**', component: PageNotFound}
     
 ];

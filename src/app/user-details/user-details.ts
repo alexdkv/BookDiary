@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../models/book';
 import { UserService } from '../services/user.service';
-import { response } from 'express';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../models/user';
 import { error } from 'console';
+import { FormsModule, NgForm } from '@angular/forms';
+import { BookService } from '../services/book.service';
+
 
 @Component({
   selector: 'app-user-details',
-  imports: [],
+  imports: [FormsModule, RouterModule],
   templateUrl: './user-details.html',
   styleUrl: './user-details.css'
 })
@@ -18,8 +20,10 @@ export class UserDetails implements OnInit {
   public currentUser: User | undefined = undefined;
 
   constructor(private userService: UserService,
-               private route: ActivatedRoute,
-              private router: Router){}
+              private bookService: BookService,
+              private route: ActivatedRoute,
+              private router: Router
+            ){}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -29,7 +33,6 @@ export class UserDetails implements OnInit {
         this.getBooksByUser(userId);
     }
     });
-  
   }
 
   public getBooksByUser(userId: number): void{
@@ -55,4 +58,22 @@ export class UserDetails implements OnInit {
       }
     })
   }
+
+  public onAddBook(addForm: NgForm, userId: number|undefined): void{
+    if (!userId) {
+    console.error('User ID is missing');
+    return;
+    }
+    document.getElementById('add-book-form')?.click();
+    this.bookService.addBook(userId, addForm.value).subscribe({
+      next: (response: Book) => {
+        this.getBooksByUser(userId);
+        addForm.reset();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.router.navigate(['/error']);
+      }
+    })
+  }
+    
 }

@@ -1,0 +1,60 @@
+body {
+  background-color: #fdf6f0; 
+  font-family: 'Georgia', serif;
+}
+
+.book-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.book-card{
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #f4e1d2;
+    border: 1px solid #d2b48c;
+    box-shadow: 0 2px 10px rgba(102, 51, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.book-image{
+    width: 120px;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 6psx rgba(0, 0, 0, 0.1);
+}
+
+.book-content{
+    flex: 1;
+}
+
+.book-card:hover{
+    transform: translateY(-3px);
+}
+
+.book-card h2{
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #5c3a21;
+}
+
+.book-card p{
+    color: #704214;
+}
+
+.book-card a{
+    display: inline-block;
+    margin-top: 1rem;
+    color: #8b4513;
+    text-decoration: none;
+}
+
+.book-card a:hover{
+    text-decoration: underline;
+}

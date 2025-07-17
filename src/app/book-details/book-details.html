@@ -1,1 +1,11 @@
-<p>book-details works!</p>
+<div>
+    <div>
+        <img [src]="bookToShow?.photoUrl" alt="">
+    </div>
+    <div>
+        <h2>{{bookToShow?.name}}</h2>
+        <h4>By: {{bookToShow?.author}}</h4>
+        <p>Pages: {{bookToShow?.pages}}</p>
+        <p>{{bookToShow?.description}}</p>
+    </div>
+</div>

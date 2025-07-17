@@ -1,8 +1,18 @@
-<p>home works!</p>
-@for (book of books; track book.id) {
-    <div>
-    <h2>{{book.name}}</h2>
-    <p>{{book.author}} --- Pages: {{book.pages}}</p>
-</div>
-}
+<body>
+    <h1>Book Diary</h1>
 
+    <div class="book-container">
+    @for (book of books; track book.id) {
+    <div class="book-card">
+        <img [src]="book.photoUrl" alt="Book cover" class="book-image">
+        <div class="book-content">
+            <h2>{{book.name}}</h2>
+            <p>{{book.author}} --- Pages: {{book.pages}}</p>
+            <a [routerLink]="['/book', book.id]">View Book</a>
+        </div>
+        
+    </div>
+    }
+    </div>
+
+</body>

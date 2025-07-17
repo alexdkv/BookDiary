@@ -1,10 +1,15 @@
-<form class="login">
+<form class="register">
     <fieldset>
-        <h2>Login</h2>
+        <h2>Register</h2>
 
         <p class="field ">
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
+        </p>
+
+        <p class="field ">
+            <label for="username">Username</label>
+            <input type="username" name="username" id="username">
         </p>
         
         <p class="field">
@@ -12,11 +17,11 @@
             <input type="password" name="password" id="password">
         </p>
 
-        <button >Login</button>
+        <button >Register</button>
 
         <p class="text-center">
-            Dont have an account?
-            <a routerLink="/register">Register</a>
+            Already have an account?
+            <a routerLink="/login">Login</a>
         </p>
     </fieldset>
 </form>

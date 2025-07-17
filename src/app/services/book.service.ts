@@ -3,12 +3,14 @@ import { environment } from "../../environments/environmnet";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Book } from "../models/book";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class BookService{
     private apiServerUrl = environment.apiBaseUrl;
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient
+    ){}
 
     public getAllBooks(): Observable<Book[]>{
         return this.http.get<Book[]>(`${this.apiServerUrl}/book/allBooks`);
