@@ -1,0 +1,65 @@
+<h1>Updating Book</h1>
+<div>
+    <form  #bookEditForm="ngForm" (ngSubmit)="onEditBook(bookEditForm)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" 
+            id="name" 
+            name="name"
+            class="form-control"
+            [(ngModel)]="bookToEdit!.name"
+            required>
+        </div>
+        
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" 
+            id="author" 
+            name="author"
+            class="form-control"
+            [(ngModel)]="bookToEdit!.author"
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" 
+            id="description" 
+            name="description"
+            class="form-control"
+            [(ngModel)]="bookToEdit!.description"
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="pages">Pages</label>
+            <input type="number" 
+            id="pages" 
+            name="pages"
+            class="form-control"
+            [(ngModel)]="bookToEdit!.pages"
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="photoUrl">Book Cover</label>
+            <input type="text" 
+            id="photoUrl" 
+            name="photoUrl"
+            class="form-control"
+            [(ngModel)]="bookToEdit!.photoUrl"
+            required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">status</label>
+            <select class="form-control" name="status" id="status" [(ngModel)]="bookToEdit!.status" required>
+                @for (status of bookStatus; track status) {
+                    <option [value]="status">{{ status }}</option>
+                }
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="bookEditForm.invalid">Edit</button>
+    </form>
+</div>

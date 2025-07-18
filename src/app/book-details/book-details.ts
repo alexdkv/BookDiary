@@ -21,22 +21,8 @@ export class BookDetails implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params =>{
-      const bookId = Number(params.get('id'));
-      if(bookId){
-        this.getBookById(bookId);
-      }
-    })
-  }
-  
-  public getBookById(bookId: number): void{
-    this.bookService.getBookById(bookId).subscribe({
-      next: (response: Book) => {
-        this.bookToShow = response;
-      },
-      error: (error: HttpErrorResponse) => {
-        console.log(error.message);
-      }
+    this.route.data.subscribe(data => {
+      this.bookToShow = data['book'];
     })
   }
 }
