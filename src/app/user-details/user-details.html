@@ -9,6 +9,7 @@
     <p>{{book.description}}</p>
     <a [routerLink]="['/book/update', book.id]">Edit Book</a>
     <a [routerLink]="['/book', book.id]">View Book</a>
+    <button (click)="onDeleteBook(book.id)">Delete</button>
 </div>
 }
 </div>

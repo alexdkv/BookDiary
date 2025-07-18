@@ -76,4 +76,17 @@ export class UserDetails implements OnInit {
     })
   }
     
+  public onDeleteBook(bookId: number): void{
+    if(confirm("Are you sure you want to delete book: ?")){
+      this.bookService.deleteBook(bookId).subscribe({
+        next: () => {
+          console.log('Book deleted');
+          this.userBooks = this.userBooks.filter(book => book.id !== bookId);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(error.message);
+        }
+      })
+    }
+  }
 }
