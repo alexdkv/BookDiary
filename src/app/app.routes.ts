@@ -9,6 +9,7 @@ import { Register } from './register/register';
 import { AddBook } from './add-book/add-book';
 import { EditBook } from './edit-book/edit-book';
 import { BookResolver } from './resolvers/book.resolver';
+import { Discover } from './discover/discover';
 
 export const routes: Routes = [
     {path:'', children:[
@@ -18,7 +19,8 @@ export const routes: Routes = [
         {path:'user/:id/books', component: UserDetails},
         {path:'book/:id', component:BookDetails, resolve:{book: BookResolver}},
         {path:'book/addBook/user/:id', component:AddBook},
-        {path:'book/update/:id', component:EditBook, resolve:{book: BookResolver} }
+        {path:'book/update/:id', component:EditBook, resolve:{book: BookResolver} },
+        {path:'discover', component: Discover}
     ]},
     {path:'login', component:Login},
     {path:'register', component:Register},

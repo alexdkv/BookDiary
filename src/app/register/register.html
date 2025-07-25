@@ -1,20 +1,25 @@
-<form class="register">
+<form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
     <fieldset>
         <h2>Register</h2>
 
         <p class="field ">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" ngModel>
         </p>
 
         <p class="field ">
             <label for="username">Username</label>
-            <input type="username" name="username" id="username">
+            <input type="username" name="username" id="username" ngModel>
         </p>
         
         <p class="field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" ngModel>
+        </p>
+
+        <p class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" ngModel>
         </p>
 
         <button >Register</button>

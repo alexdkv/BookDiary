@@ -1,0 +1,20 @@
+<p>discover works!</p>
+
+<form class="form-inline my-2 my-lg-0">
+        <input type="search" (ngModelChange)="searchBooks(key.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search Books..." required>
+     </form>
+
+<div class="book-container">
+    @for (book of books; track book.id) {
+    <div class="book-card">
+        <img [src]="book.photoUrl" alt="Book cover" class="book-image">
+        <div class="book-content">
+            <h2>{{book.name}}</h2>
+            <p>{{book.author}} --- Pages: {{book.pages}}</p>
+            <a [routerLink]="['/book', book.id]">View Book</a>
+        </div>
+        
+    </div>
+    }
+    </div>
