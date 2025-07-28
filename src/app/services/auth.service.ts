@@ -3,7 +3,6 @@ import { environment } from "../../environments/environmnet";
 import { HttpClient } from "@angular/common/http";
 import { UserRegistrationDTO } from "../models/dto/user-registration.dto";
 import { Observable } from "rxjs";
-import { User } from "../models/user";
 import { jwtDecode } from "jwt-decode";
 
 export interface JwtPayload{
@@ -22,8 +21,6 @@ export class AuthService{
 
     public isLoggedIn = this._currentUser.asReadonly();
     public currentUser = this._currentUser.asReadonly();
-
-    
 
     constructor(private http: HttpClient
     ){
@@ -47,7 +44,10 @@ export class AuthService{
     }
 
     public getToken(): string | null{
+        if (typeof window !== 'undefined' && window.localStorage) {
         return localStorage.getItem('jwtToken');
+    }
+        return null;
     }
 
     public logout(): void{

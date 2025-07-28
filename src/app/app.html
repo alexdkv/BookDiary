@@ -7,12 +7,18 @@
     </ul>
     
     <ul class="nav-right">
-    <li>
+      @if (isLoggedIn()) {
+        <li>
+          <a routerLink="user/{{ currentUser()?.id }}">My Profile</a>
+        </li>
+        <li>
+          <button  (click)="onLogout()">Logout</button>
+        </li>
+      }@else{
+        <li>
       <a routerLink="/login">Sign in</a>
-    </li>
-    <li>
-      <a routerLink="user/1">My Profile</a>
-    </li>
+    </li>     
+  }          
   </ul>
   </nav>
 </header>

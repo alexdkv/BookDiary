@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { error, log } from 'console';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -20,8 +19,6 @@ export class Login {
     this.authService.login(username, password).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        console.log(this.authService.currentUser());
-        console.log(this.authService.isLoggedIn());
         this.router.navigate(['/home']);
       },
       error: (error: HttpErrorResponse) => {
