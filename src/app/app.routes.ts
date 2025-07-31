@@ -19,7 +19,7 @@ export const routes: Routes = [
         {path:'home', component:Home},
         {path:'user/:id', redirectTo:(route) => `user/${route.params['id']}/books`, pathMatch:'full'},
         {path:'user/:id/books', component: UserDetails, canActivate: [AuthGuard]},
-        {path:'book/:id', component:BookDetails, resolve:{book: BookResolver}, canActivate: [AuthGuard]},
+        {path:'book/:id', component:BookDetails, resolve:{book: BookResolver}},
         {path:'book/addBook/user/:id', component:AddBook, canActivate: [AuthGuard]},
         {path:'book/update/:id', component:EditBook, resolve:{book: BookResolver}, canActivate: [AuthGuard] },
         {path:'discover', component: Discover, canActivate: [AuthGuard]}

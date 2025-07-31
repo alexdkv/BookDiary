@@ -1,29 +1,69 @@
-<form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
+<form class="register" (ngSubmit)="onRegister()" [formGroup]="registerForm">
     <fieldset>
         <h2>Register</h2>
+        @if (registerFailedUserAlrExists) {
+          <div>
+            <p>{{registerFailedUserAlrExists}}</p>
+          </div>
+        }
 
         <p class="field ">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" ngModel>
+            <input 
+                [class.input-error]="isEmailValid"
+                type="email" 
+                id="email"
+                formControlName="email">
         </p>
+        @if (isEmailValid) {
+    <p class="error">
+      {{ emailErrorMessage }}
+    </p>
+    }
 
         <p class="field ">
             <label for="username">Username</label>
-            <input type="username" name="username" id="username" ngModel>
+            <input 
+                [class.input-error]="isUsernameValid"
+                type="username" 
+                id="username"
+                formControlName="username">
         </p>
-        
-        <p class="field">
+        @if (isUsernameValid) {
+    <p class="error">
+      {{ usernameErrorMessage }}
+    </p>
+    }
+        <div formGroupName="passwords">
+
+            <p class="field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" ngModel>
-        </p>
-
-        <p class="field">
+            <input 
+                [class.input-error]="isPasswordsValid"
+                type="password" 
+                id="password" 
+                formControlName="password">
+             </p>
+             @if (isPasswordsValid) {
+      <p class="error">
+        {{ passwordErrorMessage }}
+      </p>
+}
+            <p class="field">
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword" ngModel>
-        </p>
-
-        <button >Register</button>
-
+            <input 
+                [class.input-error]="isPasswordsValid"
+                type="password" 
+                id="confirmPassword"
+                formControlName="confirmPassword">
+            </p>
+            @if (isPasswordsValid) {
+      <p class="error">
+        {{ confirmPasswordErrorMessage }}
+      </p>
+      }
+        </div>
+        <button [disabled]="registerForm.invalid">Register</button>
         <p class="text-center">
             Already have an account?
             <a routerLink="/login">Login</a>

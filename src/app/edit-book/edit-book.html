@@ -6,59 +6,82 @@
             <input type="text" 
             id="name" 
             name="name"
+            #name="ngModel"
             class="form-control"
             [(ngModel)]="bookToEdit!.name"
             required>
         </div>
+        @if (name.invalid && name.touched) {
+            <p>Name must be at least 3 characters!</p>
+        }
         
         <div class="form-group">
             <label for="author">Author</label>
             <input type="text" 
             id="author" 
             name="author"
+            #author="ngModel"
             class="form-control"
             [(ngModel)]="bookToEdit!.author"
             required>
         </div>
+        @if (author.invalid && author.touched) {
+            <p>Author is required!</p>
+        }
 
         <div class="form-group">
             <label for="description">Description</label>
             <input type="text" 
             id="description" 
             name="description"
+            #description="ngModel"
             class="form-control"
             [(ngModel)]="bookToEdit!.description"
             required>
         </div>
+        @if (description.invalid && description.touched) {
+            <p>Description must be at leats 10 characters!</p>
+        }
 
         <div class="form-group">
             <label for="pages">Pages</label>
             <input type="number" 
             id="pages" 
             name="pages"
+            #pages="ngModel"
             class="form-control"
             [(ngModel)]="bookToEdit!.pages"
             required>
         </div>
+        @if (pages.invalid && pages.touched) {
+            <p>Nuber of pages is required!</p>
+        }
 
         <div class="form-group">
             <label for="photoUrl">Book Cover</label>
             <input type="text" 
             id="photoUrl" 
             name="photoUrl"
+            #photoUrl="ngModel"
             class="form-control"
             [(ngModel)]="bookToEdit!.photoUrl"
             required>
         </div>
+         @if (photoUrl.invalid && photoUrl.touched) {
+            <p>Book cover is required!</p>
+        }
 
         <div class="form-group">
             <label for="status">status</label>
-            <select class="form-control" name="status" id="status" [(ngModel)]="bookToEdit!.status" required>
+            <select class="form-control" name="status" id="status" #status="ngModel" [(ngModel)]="bookToEdit!.status" required>
                 @for (status of bookStatus; track status) {
                     <option [value]="status">{{ status }}</option>
                 }
             </select>
         </div>
+         @if (status.invalid && status.touched) {
+            <p>Select book status!</p>
+        }
 
         <button class="btn btn-primary" type="submit" [disabled]="bookEditForm.invalid">Edit</button>
     </form>
