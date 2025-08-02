@@ -11,7 +11,7 @@
 
 
 <div class="book-container">
-    @for (book of books; track book.id) {
+    @for (book of resultBooks; track book.id) {
     <div class="book-card">
         <img [src]="book.photoUrl" alt="Book cover" class="book-image">
         <div class="book-content">

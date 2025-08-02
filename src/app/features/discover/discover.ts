@@ -14,7 +14,8 @@ import { ShortenDescriptionPipe } from '../../shared/pipes/shorten.pipe';
 })
 export class Discover implements OnInit{
 
-  public books: Book[] = [];
+  private books: Book[] = [];
+  protected resultBooks: Book[] = [];
 
   constructor(private bookService: BookService){}
 
@@ -26,6 +27,7 @@ export class Discover implements OnInit{
   this.bookService.getAllBooks().subscribe({
     next: (response: Book[]) => {
       this.books = response;
+      this.resultBooks = response;
       console.log(this.books);
     },
     error: (error: HttpErrorResponse) => {
@@ -38,15 +40,14 @@ export class Discover implements OnInit{
   }
 
   public searchBooks(key: string): void{
-    const resultBooks: Book[] = [];
     if(key.length >= 3){
+      this.resultBooks = [];
       for(const book of this.books){
-      if(book.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 || 
-        book.author.toLowerCase().indexOf(key.toLowerCase()) !== -1){
-        resultBooks.push(book);
+        if(book.name.toLowerCase().indexOf(key.toLowerCase().trim()) !== -1 || 
+          book.author.toLowerCase().indexOf(key.toLowerCase().trim()) !== -1){
+          this.resultBooks.push(book);
+        }
       }
-    }
-    this.books = resultBooks;
     }
     
     if (!key) {
