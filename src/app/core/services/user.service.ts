@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environmnet";
+import { environment } from "../../../environments/environmnet";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User } from "../models/user";
-import { Book } from "../models/book";
+import { User } from "../../models/user";
+import { Book } from "../../models/book";
 
 @Injectable({providedIn: 'root'})
 export class UserService{

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environmnet";
+import { environment } from "../../../environments/environmnet";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Book } from "../models/book";
+import { Book } from "../../models/book";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable({providedIn: 'root'})

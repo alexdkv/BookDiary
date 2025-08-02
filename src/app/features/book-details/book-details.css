@@ -1,0 +1,34 @@
+.book-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 5rem;
+}
+
+.book-cover img {
+    width: 400px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.book-details {
+    max-width: 600px;
+}
+
+.book-details h1{
+    margin-bottom: 1rem;
+}
+
+.book-details h5 {
+  margin-top: 0;
+  font-weight: normal;
+}
+
+.book-details p {
+  margin-top: 2rem;
+  line-height: 1.5;
+}

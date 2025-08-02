@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { BookService } from '../services/book.service';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user';
+import { BookService } from '../../core/services/book.service';
+import { UserService } from '../../core/services/user.service';
+import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Book } from '../models/book';
+import { Book } from '../../models/book';
 import { error } from 'console';
 
 @Component({

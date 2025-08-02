@@ -1,17 +1,17 @@
 import { Routes } from '@angular/router';
-import { Home } from './home/home';
+import { Home } from './features/home/home';
 import { App } from './app';
-import { Login } from './login/login';
-import { UserDetails } from './user-details/user-details';
-import { PageNotFound } from './page-not-found/page-not-found';
-import { BookDetails } from './book-details/book-details';
-import { Register } from './register/register';
-import { AddBook } from './add-book/add-book';
-import { EditBook } from './edit-book/edit-book';
-import { BookResolver } from './resolvers/book.resolver';
-import { Discover } from './discover/discover';
-import { AuthGuard } from './guards/auth.guard';
-import { GuestGuard } from './guards/guest.guard';
+import { Login } from './features/auth/login/login';
+import { UserDetails } from './features/user-details/user-details';
+import { PageNotFound } from './shared/components/page-not-found/page-not-found';
+import { BookDetails } from './features/book-details/book-details';
+import { Register } from './features/auth/register/register';
+import { AddBook } from './features/add-book/add-book';
+import { EditBook } from './features/edit-book/edit-book';
+import { BookResolver } from './core/resolvers/book.resolver';
+import { Discover } from './features/discover/discover';
+import { AuthGuard } from './core/guards/auth.guard';
+import { GuestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
     {path:'', children:[

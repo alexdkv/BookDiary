@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { BookService } from '../services/book.service';
-import { Book } from '../models/book';
+import { BookService } from '../../core/services/book.service';
+import { Book } from '../../models/book';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { response } from 'express';

@@ -1,8 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { Header } from './shared/components/header/header';
+import { Footer } from './shared/components/footer/footer';
 
 
 @Component({
@@ -11,7 +13,9 @@ import { CommonModule } from '@angular/common';
   [ 
     RouterOutlet,
     RouterModule,
-    CommonModule
+    CommonModule,
+    Header,
+    Footer
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -19,15 +23,4 @@ import { CommonModule } from '@angular/common';
 export class App {
   protected readonly title = signal('book-diary-fe');
 
-  protected authService = inject(AuthService);
-  private router = inject(Router);
- 
-  public isLoggedIn = this.authService.isLoggedIn;
-  public currentUser = this.authService.currentUser;
-
-
-  public onLogout(): void{
-    this.authService.logout();
-    this.router.navigate(['/user/login']);
-  }
 }

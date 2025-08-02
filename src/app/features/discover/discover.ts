@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../services/book.service';
-import { Book } from '../models/book';
+import { BookService } from '../../core/services/book.service';
+import { Book } from '../../models/book';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';

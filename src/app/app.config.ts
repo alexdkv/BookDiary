@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 
 export const appConfig: ApplicationConfig = {

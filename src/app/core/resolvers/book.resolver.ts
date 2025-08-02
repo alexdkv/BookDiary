@@ -1,5 +1,5 @@
 import { Resolve, ResolveFn, Router } from "@angular/router";
-import { Book } from "../models/book";
+import { Book } from "../../models/book";
 import { inject } from "@angular/core";
 import { BookService } from "../services/book.service";
 import { catchError, map, of } from "rxjs";

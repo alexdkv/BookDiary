@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserRegistrationDTO } from '../models/dto/user-registration.dto';
+import { UserRegistrationDTO } from '../../../models/dto/user-registration.dto';
 
 @Component({
   selector: 'app-register',
@@ -139,10 +139,17 @@ export class Register implements AfterViewInit{
       },
       error: (error: HttpErrorResponse) => {
         this.markFormGroupTouched();
-
-        if(error.status === 400){
-          this.registerFailedUserAlrExists = 'User with these username/email already exists!'
+        const errorMessage = error.error.message;
+        console.log(errorMessage);
+        
+        if(errorMessage.includes('username')){
+          this.username?.setErrors({taken: true})
         }
+        if(errorMessage.includes('email')){
+          this.email?.setErrors({ taken: true });
+        }
+        this.registerFailedUserAlrExists = errorMessage;
+        
         console.error(error.message);
     }
     });

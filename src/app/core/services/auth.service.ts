@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
-import { environment } from "../../environments/environmnet";
+import { environment } from "../../../environments/environmnet";
 import { HttpClient } from "@angular/common/http";
-import { UserRegistrationDTO } from "../models/dto/user-registration.dto";
+import { UserRegistrationDTO } from "../../models/dto/user-registration.dto";
 import { Observable } from "rxjs";
 import { jwtDecode } from "jwt-decode";
 
