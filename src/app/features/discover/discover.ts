@@ -4,10 +4,11 @@ import { Book } from '../../models/book';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ShortenDescriptionPipe } from '../../shared/pipes/shorten.pipe';
 
 @Component({
   selector: 'app-discover',
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, ShortenDescriptionPipe],
   templateUrl: './discover.html',
   styleUrl: './discover.css'
 })

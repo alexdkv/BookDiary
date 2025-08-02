@@ -1,15 +1,35 @@
 <div class="container" id="main-container">
-    <h2>Hello! This is {{currentUser?.username}} profile</h2>
-    <a [routerLink]="['/book/addBook/user',currentUser?.id,]">Add Book</a>
-    <h6>{{currentUser?.email}}</h6>
-    @for (book of userBooks; track book.id) {
-    <div>
-    <h2>{{book.name}}</h2>
-    <p>{{book.author}} --- Pages: {{book.pages}}</p>
-    <p>{{book.description}}</p>
-    <a [routerLink]="['/book/update', book.id]">Edit Book</a>
-    <a [routerLink]="['/book', book.id]">View Book</a>
-    <button (click)="onDeleteBook(book.id)">Delete</button>
-</div>
-}
+    <div class="main-content">
+        <h2>{{currentUser?.username}}'s profile</h2>
+        <h6>email: {{currentUser?.email}}</h6>
+        <a class="btn-style" [routerLink]="['/book/addBook/user',currentUser?.id,]">Add Book</a>
+        @if (filteredBooks.length === 0) {
+                <div>
+                    <h4>You have no books in this category!</h4>
+                    
+                </div>
+            }
+        <div class="book-grid">
+           
+            @for (book of filteredBooks; track book.id) {
+            <div class="book-card">
+                <a class="book" [routerLink]="['/book', book.id]">
+                    <img [src]="book.photoUrl" alt="Book cover" class="book-cover">
+                    <h5>{{book.name}}</h5>
+                </a>
+                <div class="book-nav">  
+                    <a class="btn-link" [routerLink]="['/book/update', book.id]">Edit Book</a>
+                    <button class="btn-link" (click)="onDeleteBook(book.id)">Delete</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <aside class="filter">
+        <h4>Filter</h4>
+        <label><input type="radio" name="status" (change)="filterBooks('ALL')" checked>All books</label>
+        <label><input type="radio" name="status" (change)="filterBooks('READ')">Read books</label>
+        <label><input type="radio" name="status" (change)="filterBooks('READING')">Currently reading</label>
+        <label><input type="radio" name="status" (change)="filterBooks('WANT_TO_READ')">Want to read</label>
+    </aside>
 </div>

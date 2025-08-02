@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    flex: 1;
+.app-wrapp {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
 }
 
 input.ng-valid {
@@ -14,12 +20,13 @@ border-left: 5px solid #A94442;
   background-color: #c36a2d;
   text-align: center;
   padding: 5px 0;
+  margin-top: 50px;
   font-size: 14px;
   border-top: 1px solid #ddd;
 }
 
 .footer a {
-  color: #007bff;
+  color: black;
   text-decoration: none;
 }
 

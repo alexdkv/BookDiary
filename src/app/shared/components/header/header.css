@@ -1,6 +1,7 @@
 header{
     background-color: #c36a2d;
     padding: 1rem 2rem;
+    margin-bottom: 50px;
 }
 
 .navbar{
@@ -30,6 +31,18 @@ a{
     font-weight: bold;
 }
 
-a:hover{
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover, button:hover{
     text-decoration: underline;
 }

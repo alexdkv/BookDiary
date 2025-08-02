@@ -7,6 +7,7 @@
         <div class="book-content">
             <h2>{{book.name}}</h2>
             <p>{{book.author}} --- Pages: {{book.pages}}</p>
+            <p>{{book.description | shortenDescription}}</p>
             <a [routerLink]="['/book', book.id]">View Book</a>
         </div>
         

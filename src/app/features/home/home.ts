@@ -5,10 +5,13 @@ import { response } from 'express';
 import { error } from 'console';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ShortenDescriptionPipe } from '../../shared/pipes/shorten.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule],
+  imports: [RouterModule,
+    ShortenDescriptionPipe
+  ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

@@ -9,6 +9,9 @@
     <ul class="nav-right">
       @if (isLoggedIn()) {
         <li>
+          <a routerLink="discover">Discover</a>
+        </li>
+        <li>
           <a routerLink="user/{{ currentUser()?.id }}">My Profile</a>
         </li>
         <li>

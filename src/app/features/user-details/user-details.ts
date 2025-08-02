@@ -4,7 +4,7 @@ import { UserService } from '../../core/services/user.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../../models/user';
-import { error } from 'console';
+import { dir, error } from 'console';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BookService } from '../../core/services/book.service';
 
@@ -17,6 +17,7 @@ import { BookService } from '../../core/services/book.service';
 })
 export class UserDetails implements OnInit {
   public userBooks: Book[] = [];
+  public filteredBooks: Book[] = [];
   public currentUser: User | undefined = undefined;
 
   constructor(private userService: UserService,
@@ -33,12 +34,14 @@ export class UserDetails implements OnInit {
         this.getBooksByUser(userId);
     }
     });
+    
   }
 
   public getBooksByUser(userId: number): void{
     this.userService.getBooksByUser(userId).subscribe({
       next: (response: Book[]) => {
         this.userBooks = response;
+        this.filteredBooks = response;
       },
       error:(error: HttpErrorResponse) => {
       console.error(error.message);
@@ -82,11 +85,20 @@ export class UserDetails implements OnInit {
         next: () => {
           console.log('Book deleted');
           this.userBooks = this.userBooks.filter(book => book.id !== bookId);
+          this.filteredBooks = this.filteredBooks.filter(book => book.id !== bookId);
         },
         error: (error: HttpErrorResponse) => {
           console.log(error.message);
         }
       })
+    }
+  }
+
+  public filterBooks(status: string){
+    if(status === 'ALL'){
+      this.filteredBooks = this.userBooks;
+    }else{
+      this.filteredBooks = this.userBooks.filter(book => book.status === status);
     }
   }
 }
