@@ -8,18 +8,19 @@
             </div>
         }
 
-        <p class="field ">
+        <div class="form-group ">
             <label for="username">Username</label>
             <input 
             type="username" 
             name="username"
             id="username"
             #username="ngModel" 
+            class="form-control"
             required
             minlength="4"
             ngModel
             >
-        </p>
+        </div>
         @if(username.invalid && username.touched ){
             <div alert alert-danger>
                 <p>Username must be 4 characters at least!</p>
@@ -27,23 +28,24 @@
         }
 
         
-        <p class="field">
+        <div class="form-group">
             <label for="password">Password</label>
             <input type="password" 
             name="password" 
             id="password"
             #password="ngModel"
+            class="form-control"
             required
             minlength="5" 
             ngModel>
-        </p>
+        </div>
          @if(password.invalid && password.touched ){
             <div alert alert-danger>
                 <p>Password must be 5 characters at least!</p>
             </div>
         }
 
-        <button [disabled]="loginForm.invalid">Login</button>
+        <button class="btn" [disabled]="loginForm.invalid">Login</button>
 
         <p class="text-center">
             Dont have an account?

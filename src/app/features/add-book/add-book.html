@@ -1,7 +1,7 @@
-<p>add-book works!</p>
-
 <div>
+    
     <form  #bookAddForm="ngForm" (ngSubmit)="onSubmit(bookAddForm)">
+        <h2>Add Book</h2>
         <div class="form-group">
             <label for="name">Name</label>
             <input 
@@ -80,7 +80,7 @@
         }
 
         <div class="form-group">
-            <label for="status">status</label>
+            <label for="status">Status</label>
             <select class="form-control" name="status" id="status" ngModel #status="ngModel" required>
                 @for (status of bookStatus; track status) {
                     <option [value]="status">{{ status }}</option>

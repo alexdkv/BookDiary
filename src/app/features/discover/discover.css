@@ -8,6 +8,8 @@
 .form-inline{
     width: 100%;
     max-width: 425px;
+    margin: 0;
+    background: none;
 }
 
 

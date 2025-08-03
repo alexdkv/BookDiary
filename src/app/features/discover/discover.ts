@@ -40,7 +40,7 @@ export class Discover implements OnInit{
   }
 
   public searchBooks(key: string): void{
-    if(key.length >= 3){
+    if(key.length >= 1){
       this.resultBooks = [];
       for(const book of this.books){
         if(book.name.toLowerCase().indexOf(key.toLowerCase().trim()) !== -1 || 

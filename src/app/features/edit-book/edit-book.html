@@ -1,6 +1,7 @@
-<h1>Updating Book</h1>
 <div>
+    
     <form  #bookEditForm="ngForm" (ngSubmit)="onEditBook(bookEditForm)">
+        <h2>Updating Book</h2>
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" 
@@ -72,7 +73,7 @@
         }
 
         <div class="form-group">
-            <label for="status">status</label>
+            <label for="status">Status</label>
             <select class="form-control" name="status" id="status" #status="ngModel" [(ngModel)]="bookToEdit!.status" required>
                 @for (status of bookStatus; track status) {
                     <option [value]="status">{{ status }}</option>
