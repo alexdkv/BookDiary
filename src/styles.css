@@ -30,7 +30,7 @@ form h2 {
   margin-bottom: 1.5rem;
 }
 
-p, .error-message p {
+.error-message p {
   color: #d9534f;
   font-size: 0.9rem;
   margin-top: 0.25rem;
