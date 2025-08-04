@@ -13,6 +13,7 @@ import { Discover } from './features/discover/discover';
 import { AuthGuard } from './core/guards/auth.guard';
 import { GuestGuard } from './core/guards/guest.guard';
 import { PageOwnerGuard } from './core/guards/page.owner.guard';
+import { EditBookUserGuard } from './core/guards/edit.book.guard';
 
 export const routes: Routes = [
     {path:'', children:[
@@ -22,7 +23,7 @@ export const routes: Routes = [
         {path:'user/:id/books', component: UserDetails, canActivate: [AuthGuard, PageOwnerGuard]},
         {path:'book/:id', component:BookDetails, resolve:{book: BookResolver}},
         {path:'book/addBook/user/:id', component:AddBook, canActivate: [AuthGuard, PageOwnerGuard]},
-        {path:'book/update/:id', component:EditBook, resolve:{book: BookResolver}, canActivate: [AuthGuard] },
+        {path:'book/update/:id', component:EditBook, resolve:{book: BookResolver}, canActivate: [AuthGuard, EditBookUserGuard] },
         {path:'discover', component: Discover, canActivate: [AuthGuard]}
     ]},
     {path:'login', component:Login, canActivate: [GuestGuard]},

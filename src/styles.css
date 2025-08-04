@@ -50,7 +50,7 @@ select.form-control {
   width: 100%;
 }
 
-button[type="submit"],
+
 button.btn-primary,
 button.btn {
   display: block;
@@ -59,20 +59,20 @@ button.btn {
   margin: 20px auto;
   font-weight: bold;
   border-radius: 6px;
-  border-color: none;
-  background-color: #c36a2d;;
+  border-color: #c36a2d !important;
+  background-color: #c36a2d;
   transition: background 0.2s ease-in-out;
 }
 
-button[type="submit"]:hover,
+
 button.btn-primary:hover,
 button.btn:hover{
-  background-color: #e2c275;
-  border-color: none;
+  background-color: #e2c275 !important;
+  border-color: none !important;
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: #ccc !important; 
 }
 
 .text-center {
