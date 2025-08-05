@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { response } from 'express';
 import { error } from 'console';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BookRating } from '../book-rating/book-rating';
 
 @Component({
   selector: 'app-book-details',
-  imports: [],
+  imports: [BookRating],
   templateUrl: './book-details.html',
   styleUrl: './book-details.css'
 })

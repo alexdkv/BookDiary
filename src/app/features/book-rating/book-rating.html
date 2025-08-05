@@ -1,0 +1,14 @@
+<p>book-rating works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="rating">
+  @for (star of stars; track star) {
+  <i class="fa fa-star"
+    [class.fas]="(userHasRated && star <= currentRating) || (!userHasRated && star <= averageRating)"
+    [class.far]="(userHasRated && star > currentRating) || (!userHasRated && star > averageRating)"
+    [class.clickable]="!readonly" (click)="rateBook(star)">
+  </i>
+  }
+  <span class="average-rating">
+    ({{ averageRating.toFixed(1) }})
+  </span>
+</div>

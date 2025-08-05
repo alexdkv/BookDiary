@@ -5,6 +5,8 @@
     <div class="book-details">
         <h1>{{bookToShow?.name}}</h1>
         <h5>Author: {{bookToShow?.author}}</h5>
+        <app-book-rating [bookId]="bookToShow?.id" [readonly]="false"></app-book-rating>
+        
         <p>{{bookToShow?.description}}</p>
         <p>Pages: {{bookToShow?.pages}}</p>
     </div>

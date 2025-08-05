@@ -1,3 +1,4 @@
+import { Rating } from "./rating";
 import { User } from "./user";
 
 export interface Book{
@@ -9,4 +10,5 @@ export interface Book{
     photoUrl: string;
     status: string;
     user: User;
+    ratings: Rating[];
 }

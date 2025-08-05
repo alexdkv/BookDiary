@@ -3,6 +3,7 @@ import { Book } from "../../models/book";
 import { inject } from "@angular/core";
 import { BookService } from "../services/book.service";
 import { catchError, map, of } from "rxjs";
+import { log } from "node:console";
 
 export const BookResolver: ResolveFn<Book | ReturnType<Router['parseUrl']>> = (route) =>{
     const idString = route.paramMap.get('id');
@@ -16,6 +17,8 @@ export const BookResolver: ResolveFn<Book | ReturnType<Router['parseUrl']>> = (r
 
     return bookService.getBookById(id).pipe(
         map(book => {
+            console.log(book);
+            
             if(!book){
                 return router.parseUrl('/not-found');
             }

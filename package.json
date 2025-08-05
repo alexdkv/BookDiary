@@ -29,6 +29,7 @@
     "@angular/platform-server": "^20.1.0",
     "@angular/router": "^20.1.0",
     "@angular/ssr": "^20.1.0",
+    "@fortawesome/fontawesome-free": "^7.0.0",
     "bootstrap": "^5.3.7",
     "express": "^5.1.0",
     "jwt-decode": "^4.0.0",
