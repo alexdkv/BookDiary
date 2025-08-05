@@ -5,16 +5,16 @@ import { UserRegistrationDTO } from "../../models/dto/user-registration.dto";
 import { Observable } from "rxjs";
 import { jwtDecode } from "jwt-decode";
 
-export interface JwtPayload{
-    sub: string; 
+export interface JwtPayload {
+    sub: string;
     id?: number;
     exp?: number;
     iat?: number;
     [key: string]: any;
 }
 
-@Injectable({providedIn: 'root'})
-export class AuthService{
+@Injectable({ providedIn: 'root' })
+export class AuthService {
     private apiServerUrl = environment.apiBaseUrl;
     private _isLogedIn = signal<boolean>(false);
     private _currentUser = signal<JwtPayload | null>(null);
@@ -23,45 +23,45 @@ export class AuthService{
     public currentUser = this._currentUser.asReadonly();
 
     constructor(private http: HttpClient
-    ){
+    ) {
         const token = this.getToken();
-        if(token){
-           this.setUser(token);
+        if (token) {
+            this.setUser(token);
         }
     }
 
-    public registerUser(user: UserRegistrationDTO): Observable<any>{
+    public registerUser(user: UserRegistrationDTO): Observable<any> {
         return this.http.post(`${this.apiServerUrl}/user/register`, user);
     }
 
-    public login(username: string, password: string): Observable<any>{
-        return this.http.post(`${this.apiServerUrl}/user/login`,{username, password});
+    public login(username: string, password: string): Observable<any> {
+        return this.http.post(`${this.apiServerUrl}/user/login`, { username, password });
     }
 
-    public saveToken(token: string): void{
+    public saveToken(token: string): void {
         localStorage.setItem('jwtToken', token);
         this.setUser(token);
     }
 
-    public getToken(): string | null{
+    public getToken(): string | null {
         if (typeof window !== 'undefined' && window.localStorage) {
-        return localStorage.getItem('jwtToken');
-    }
+            return localStorage.getItem('jwtToken');
+        }
         return null;
     }
 
-    public logout(): void{
+    public logout(): void {
         localStorage.removeItem('jwtToken');
         this._isLogedIn.set(false);
         this._currentUser.set(null);
     }
 
-    private setUser(token: string): void{
-        try{
+    private setUser(token: string): void {
+        try {
             const decodedToken = jwtDecode<JwtPayload>(token);
             this._currentUser.set(decodedToken);
             this._isLogedIn.set(true);
-        }catch(error){
+        } catch (error) {
             console.log('Invalid token', error);
             this.logout();
         }
