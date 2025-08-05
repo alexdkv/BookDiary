@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../core/services/book.service';
-import { Book } from '../../models/book';
+import { BookService } from '../../../core/services/book.service';
+import { Book } from '../../../models/book';
 import { ActivatedRoute } from '@angular/router';
 import { response } from 'express';
 import { error } from 'console';
@@ -18,7 +18,7 @@ export class BookDetails implements OnInit {
 
   constructor(private bookService: BookService,
     private route: ActivatedRoute
-  ){
+  ) {
   }
 
   ngOnInit(): void {

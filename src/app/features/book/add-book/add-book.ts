@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { BookService } from '../../core/services/book.service';
-import { UserService } from '../../core/services/user.service';
-import { User } from '../../models/user';
+import { BookService } from '../../../core/services/book.service';
+import { UserService } from '../../../core/services/user.service';
+import { User } from '../../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Book } from '../../models/book';
+import { Book } from '../../../models/book';
 import { error } from 'console';
 
 @Component({
@@ -14,7 +14,7 @@ import { error } from 'console';
   templateUrl: './add-book.html',
   styleUrl: './add-book.css'
 })
-export class AddBook implements OnInit{
+export class AddBook implements OnInit {
   private currentUser: User | undefined;
 
   bookStatus: string[] = [
@@ -23,23 +23,23 @@ export class AddBook implements OnInit{
     'READING'
   ];
   constructor(private bookService: BookService,
-              private userService: UserService,
-              private route: ActivatedRoute,
-              private router: Router
-  ){
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const userId = Number(params.get('id'));
-      if(userId){
+      if (userId) {
         this.getUserById(userId);
-        
-    }
+
+      }
     });
   }
 
-  public getUserById(userId: number): void{
+  public getUserById(userId: number): void {
     this.userService.getUserById(userId).subscribe({
       next: (response: User) => {
         this.currentUser = response;
@@ -51,8 +51,8 @@ export class AddBook implements OnInit{
     })
   }
 
-  public onSubmit(form: NgForm):void{
-    
+  public onSubmit(form: NgForm): void {
+
     const bookToAdd: Book = {
       ...form.value,
       user: this.currentUser

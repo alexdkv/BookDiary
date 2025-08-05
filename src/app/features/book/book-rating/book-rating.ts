@@ -1,27 +1,27 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { RatingService } from '../../core/services/rating.service';
-import { AuthService } from '../../core/services/auth.service';
-import { User } from '../../models/user';
+import { RatingService } from '../../../core/services/rating.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { User } from '../../../models/user';
 
 @Component({
-  selector: 'app-book-rating',
-  imports: [],
-  templateUrl: './book-rating.html',
-  styleUrl: './book-rating.css'
+    selector: 'app-book-rating',
+    imports: [],
+    templateUrl: './book-rating.html',
+    styleUrl: './book-rating.css'
 })
-export class BookRating implements OnInit{
+export class BookRating implements OnInit {
     @Input() bookId!: number | undefined;
     @Input() readonly: boolean = false;
 
     private authService = inject(AuthService);
-    
+
     protected stars: number[] = [1, 2, 3, 4, 5];
     protected currentRating: number = 0;
     protected averageRating: number = 0;
     protected userHasRated: boolean = false;
     protected userId: number | undefined;
 
-    constructor(private ratingService: RatingService){}
+    constructor(private ratingService: RatingService) { }
 
     ngOnInit(): void {
         this.userId = this.authService.currentUser()?.id;
@@ -29,8 +29,8 @@ export class BookRating implements OnInit{
         this.checkUserRating();
     }
 
-    private getAvgRating(): void{
-        if(!this.bookId){
+    private getAvgRating(): void {
+        if (!this.bookId) {
             return;
         }
         this.ratingService.getAvgRating(this.bookId).subscribe({
@@ -43,8 +43,8 @@ export class BookRating implements OnInit{
         });
     }
 
-    private checkUserRating(): void{
-        if(!this.bookId || !this.userId){
+    private checkUserRating(): void {
+        if (!this.bookId || !this.userId) {
             return;
         }
 
@@ -57,25 +57,25 @@ export class BookRating implements OnInit{
         });
     }
 
-    public rateBook(star: number): void{
+    public rateBook(star: number): void {
         console.log(this.userId);
-        
-        if(this.readonly ){
+
+        if (this.readonly) {
             return;
         }
-        if(!this.bookId){
+        if (!this.bookId) {
             return;
         }
         if (!this.userId) {
             return;
         }
-        this.ratingService.rateBook(this.bookId, this.userId , star).subscribe({
-            next:() => {
+        this.ratingService.rateBook(this.bookId, this.userId, star).subscribe({
+            next: () => {
                 this.currentRating = star;
                 this.userHasRated = true;
                 this.getAvgRating();
             },
-            error:() => {
+            error: () => {
                 alert('Couldnt submit rating');
             }
         })

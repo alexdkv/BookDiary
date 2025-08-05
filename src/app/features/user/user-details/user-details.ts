@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../../models/book';
-import { UserService } from '../../core/services/user.service';
+import { Book } from '../../../models/book';
+import { UserService } from '../../../core/services/user.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { User } from '../../models/user';
+import { User } from '../../../models/user';
 import { dir, error } from 'console';
 import { FormsModule, NgForm } from '@angular/forms';
-import { BookService } from '../../core/services/book.service';
+import { BookService } from '../../../core/services/book.service';
 
 
 @Component({
@@ -21,36 +21,36 @@ export class UserDetails implements OnInit {
   public currentUser: User | undefined = undefined;
 
   constructor(private userService: UserService,
-              private bookService: BookService,
-              private route: ActivatedRoute,
-              private router: Router
-            ){}
+    private bookService: BookService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const userId = Number(params.get('id'));
-      if(userId){
+      if (userId) {
         this.getUserById(userId);
         this.getBooksByUser(userId);
-    }
+      }
     });
-    
+
   }
 
-  public getBooksByUser(userId: number): void{
+  public getBooksByUser(userId: number): void {
     this.userService.getBooksByUser(userId).subscribe({
       next: (response: Book[]) => {
         this.userBooks = response;
         this.filteredBooks = response;
       },
-      error:(error: HttpErrorResponse) => {
-      console.error(error.message);
-      this.router.navigate(['/error']);
+      error: (error: HttpErrorResponse) => {
+        console.error(error.message);
+        this.router.navigate(['/error']);
       }
     });
   }
 
-  public getUserById(userId: number): void{
+  public getUserById(userId: number): void {
     this.userService.getUserById(userId).subscribe({
       next: (response: User) => {
         this.currentUser = response;
@@ -62,10 +62,10 @@ export class UserDetails implements OnInit {
     })
   }
 
-  public onAddBook(addForm: NgForm, userId: number|undefined): void{
+  public onAddBook(addForm: NgForm, userId: number | undefined): void {
     if (!userId) {
-    console.error('User ID is missing');
-    return;
+      console.error('User ID is missing');
+      return;
     }
     document.getElementById('add-book-form')?.click();
     this.bookService.addBook(userId, addForm.value).subscribe({
@@ -78,9 +78,9 @@ export class UserDetails implements OnInit {
       }
     })
   }
-    
-  public onDeleteBook(bookId: number): void{
-    if(confirm("Are you sure you want to delete book: ?")){
+
+  public onDeleteBook(bookId: number): void {
+    if (confirm("Are you sure you want to delete book: ?")) {
       this.bookService.deleteBook(bookId).subscribe({
         next: () => {
           console.log('Book deleted');
@@ -94,10 +94,10 @@ export class UserDetails implements OnInit {
     }
   }
 
-  public filterBooks(status: string){
-    if(status === 'ALL'){
+  public filterBooks(status: string) {
+    if (status === 'ALL') {
       this.filteredBooks = this.userBooks;
-    }else{
+    } else {
       this.filteredBooks = this.userBooks.filter(book => book.status === status);
     }
   }
