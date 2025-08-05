@@ -4,11 +4,11 @@
   justify-content: center;
   gap: 4px;
   font-size: 1.5rem;
-  color: #FFD700; /* Gold */
+  color: #FFD700;
 }
 
 i.far {
-  color: #ccc; /* Gray for empty */
+  color: #ccc;
 }
 
 i.clickable {

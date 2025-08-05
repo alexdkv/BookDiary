@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="rating">
+    @for (star of [1,2,3,4,5]; track star) {
+    <i class="fa fa-star" [class.fas]="(userHasRated && star <= currentRating)"
+        [class.far]="(userHasRated && star > currentRating)" [class.clickable]="!readonly" (click)="rateBook(star)">
+    </i>
+    }
+
+</div>
