@@ -3,46 +3,31 @@
         <h2>Login</h2>
 
         @if (loginFailedMessage) {
-            <div class="erorr-message">
-                <p>{{loginFailedMessage}}</p>
-            </div>
+        <div class="erorr-message">
+            <p>{{loginFailedMessage}}</p>
+        </div>
         }
 
         <div class="form-group ">
-            <label for="username">Username</label>
-            <input 
-            type="username" 
-            name="username"
-            id="username"
-            #username="ngModel" 
-            class="form-control"
-            required
-            minlength="4"
-            ngModel
-            >
+            <label for="username">Email</label>
+            <input type="email" name="email" id="email" #email="ngModel" class="form-control" required ngModel>
         </div>
-        @if(username.invalid && username.touched ){
-            <div alert alert-danger>
-                <p>Username must be 4 characters at least!</p>
-            </div>
+        @if(email.invalid && email.touched ){
+        <div alert alert-danger>
+            <p>Email is invalid!</p>
+        </div>
         }
 
-        
+
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" 
-            name="password" 
-            id="password"
-            #password="ngModel"
-            class="form-control"
-            required
-            minlength="5" 
-            ngModel>
+            <input type="password" name="password" id="password" #password="ngModel" class="form-control" required
+                minlength="5" ngModel>
         </div>
-         @if(password.invalid && password.touched ){
-            <div alert alert-danger>
-                <p>Password must be 5 characters at least!</p>
-            </div>
+        @if(password.invalid && password.touched ){
+        <div alert alert-danger>
+            <p>Password must be 5 characters at least!</p>
+        </div>
         }
 
         <button class="btn" [disabled]="loginForm.invalid">Login</button>

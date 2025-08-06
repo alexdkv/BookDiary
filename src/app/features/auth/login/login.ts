@@ -17,15 +17,15 @@ export class Login {
   protected loginFailedMessage: string | null = null;
 
   public onLogin(form: NgForm): void{
-    const {username, password} = form.value;
-    this.authService.login(username, password).subscribe({
+    const {email, password} = form.value;
+    this.authService.login(email, password).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
         this.loginFailedMessage = null;
         this.router.navigate(['/home']);
       },
       error: (error: HttpErrorResponse) => {
-        this.loginFailedMessage = 'Ivalid username or password!'
+        this.loginFailedMessage = 'Ivalid email or password!'
         console.log('Login failed', error.message);
       }
     })
