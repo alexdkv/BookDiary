@@ -5,12 +5,20 @@
     <div class="book-details">
         <h1>{{bookToShow?.name}}</h1>
         <h5>Author: {{bookToShow?.author}}</h5>
-        <app-book-rating [bookId]="bookToShow!.id" [readonly]="false"></app-book-rating>
+        <app-book-rating 
+            [averageRating]="averageRating()"
+            [bookId]="bookToShow!.id"
+            [readonly]="false"
+         ></app-book-rating>
+         <p>{{averageRating()}}</p>
         <p>Pages: {{bookToShow?.pages}}</p>
         <p>{{bookToShow?.description}}</p>
 
         @if (authService.isLoggedIn()) {
-        <app-add-rating [bookId]="bookToShow!.id" [readonly]="false"></app-add-rating>
+        <app-add-rating 
+        [bookId]="bookToShow!.id" 
+        [readonly]="false"
+        (ratingSubmitted)="updateRating($event)"></app-add-rating>
         }
     </div>
 </div>

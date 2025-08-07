@@ -1,8 +1,4 @@
-import { Component, computed, inject, Input, OnInit, signal } from '@angular/core';
-import { RatingService } from '../../../core/services/rating.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { User } from '../../../models/user';
-import { RatingStateService } from '../../../core/services/rating.state.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-book-rating',
@@ -10,42 +6,17 @@ import { RatingStateService } from '../../../core/services/rating.state.service'
     templateUrl: './book-rating.html',
     styleUrl: './book-rating.css'
 })
-export class BookRating implements OnInit {
+export class BookRating {
     @Input({ required: true }) bookId!: number;
+    @Input() averageRating: number = 0;
     @Input() readonly: boolean = false;
     
-
     stars = [1, 2, 3, 4, 5];
-    private ratingStateService = inject(RatingStateService)
+    
+    constructor() { }
 
-    constructor(private ratingService: RatingService) { }
-
-    averageRating = computed(() => 0);
-    roundedAvgRating = computed(() => {
-        const rating = this.averageRating();
-        return Math.round(rating * 2) / 2;
-    })
-
-    ngOnInit(): void {
-        //this.getAvgRating();
-        this.averageRating = this.ratingStateService.getAverageRating(this.bookId);
-        this.ratingStateService.updateAverageRating(this.bookId);
-
-    }
-
-    // private getAvgRating(): void {
-    //     if (!this.bookId) {
-    //         return;
-    //     }
-    //     this.ratingService.getAvgRating(this.bookId).subscribe({
-    //         next: (rating) => {
-    //             this.averageRating.set(rating);
-    //         },
-    //         error: () => {
-    //             console.warn('Could not load rating');
-    //         }
-    //     });
-    // }
-
+    get roundedAvgRating(): number {
+        return Math.round(this.averageRating * 2) / 2;
+  }
 
 }

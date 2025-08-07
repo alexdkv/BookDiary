@@ -1,8 +1,6 @@
-import { Component, DestroyRef, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { RatingService } from '../../../core/services/rating.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { EventEmitter } from 'stream';
-import { RatingStateService } from '../../../core/services/rating.state.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -14,11 +12,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class AddRating implements OnInit {
   @Input({ required: true }) bookId!: number;
   @Input() readonly: boolean = false;
-
+  @Output() ratingSubmitted = new EventEmitter<number>();
 
   private authService = inject(AuthService);
   private ratingService = inject(RatingService);
-  private ratingStateService = inject(RatingStateService);
   private destroyRef = inject(DestroyRef);
 
   protected stars: number[] = [1, 2, 3, 4, 5];
@@ -45,7 +42,7 @@ export class AddRating implements OnInit {
       next: () => {
         this.currentRating = star;
         this.userHasRated = true;
-        this.ratingStateService.updateAverageRating(this.bookId);
+        this.ratingSubmitted.emit(this.bookId);
       }
     });
   }
