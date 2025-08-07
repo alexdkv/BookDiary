@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
-  imports: [],
+  imports: [
+    RouterOutlet,
+    RouterModule
+  ],
   templateUrl: './page-not-found.html',
   styleUrl: './page-not-found.css'
 })
