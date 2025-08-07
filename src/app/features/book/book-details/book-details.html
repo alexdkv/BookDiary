@@ -1,24 +1,36 @@
-<div class="book-info">
+<div class="book-container">
+  <!-- Book Info Section -->
+  <div class="book-info">
     <div class="book-cover">
-        <img [src]="bookToShow?.photoUrl" alt="">
+      <img [src]="bookToShow?.photoUrl" alt="">
     </div>
     <div class="book-details">
-        <h1>{{bookToShow?.name}}</h1>
-        <h5>Author: {{bookToShow?.author}}</h5>
+      <h1>{{bookToShow?.name}}</h1>
+      <div class="rating-row">
         <app-book-rating 
-            [averageRating]="averageRating()"
-            [bookId]="bookToShow!.id"
-            [readonly]="false"
-         ></app-book-rating>
-         <p>{{averageRating()}}</p>
-        <p>Pages: {{bookToShow?.pages}}</p>
-        <p>{{bookToShow?.description}}</p>
+          [averageRating]="averageRating()"
+          [bookId]="bookToShow!.id"
+          [readonly]="false">
+        </app-book-rating>
+        <h5>Author: {{bookToShow?.author}}</h5>
+      </div>
+      <p>Pages: {{bookToShow?.pages}}</p>
+      <p>{{bookToShow?.description}}</p>
+    </div>
+  </div>
 
-        @if (authService.isLoggedIn()) {
-        <app-add-rating 
+  @if (authService.isLoggedIn()) {
+  <div class="rating-section">
+    <div class="rating-prompt">
+      <span>
+        <i class="fas fa-pencil-alt"></i> Rate this book:
+      </span>
+      <app-add-rating 
         [bookId]="bookToShow!.id" 
         [readonly]="false"
-        (ratingSubmitted)="updateRating($event)"></app-add-rating>
-        }
+        (ratingSubmitted)="updateRating($event)">
+      </app-add-rating>
     </div>
+  </div>
+}
 </div>

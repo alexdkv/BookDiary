@@ -1,6 +1,6 @@
 import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { Book } from '../../../models/book';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookRating } from '../book-rating/book-rating';
 import { AuthService } from '../../../core/services/auth.service';
 import { AddRating } from '../add-rating/add-rating';
@@ -22,18 +22,28 @@ export class BookDetails implements OnInit {
   constructor(
     private ratingService: RatingService,
     private route: ActivatedRoute,
-    protected authService: AuthService
+    protected authService: AuthService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.route.data
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(data => {
-      this.bookToShow = data['book'];
-    })
-
-    this.loadRating(this.bookToShow!.id);
+    .subscribe ({
+      next: (data => {
+        this.bookToShow = data['book'];
+        if (!this.bookToShow?.id) {
+          this.router.navigate(['/not-found']);
+          return; 
+        }
+        
+        this.loadRating(this.bookToShow!.id);
+      }),
+      error: () => {
+        this.router.navigate(['/not-found']);
+      }
+    })   
   }
 
   loadRating(bookId: number): void {

@@ -6,21 +6,19 @@ import { catchError, map, of } from "rxjs";
 import { log } from "node:console";
 
 export const BookResolver: ResolveFn<Book | ReturnType<Router['parseUrl']>> = (route) =>{
-    const idString = route.paramMap.get('id');
+    const id =Number( route.paramMap.get('id'));
     const router = inject(Router)
-    const id = idString ? parseInt(idString, 10) : null;
     const bookService = inject(BookService);
     
     if (id === null || isNaN(id)) {
-    return router.parseUrl('/not-found');
+        return router.parseUrl('/not-found');
   }
 
     return bookService.getBookById(id).pipe(
         map(book => {
-            console.log(book);
             
             if(!book){
-                return router.parseUrl('/not-found');
+                throw new Error('Book not found');
             }
             return book;
         }),

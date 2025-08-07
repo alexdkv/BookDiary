@@ -1,34 +1,66 @@
+.book-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 .book-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    gap: 5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  margin-bottom: 2rem;
 }
 
 .book-cover img {
-    width: 400px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .book-details {
-    max-width: 600px;
+  max-width: 600px;
+  flex: 1;
 }
 
-.book-details h1{
-    margin-bottom: 1rem;
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.book-details h1 {
+  margin-bottom: 0.5rem;
 }
 
 .book-details h5 {
-  margin-top: 0;
+  margin: 0;
   font-weight: normal;
 }
 
 .book-details p {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   line-height: 1.5;
 }
+
+.rating-section {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.rating-prompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-prompt span {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 500;
+  cursor:default;
+}
+
