@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Book } from '../../../models/book';
 import { UserService } from '../../../core/services/user.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -7,6 +7,7 @@ import { User } from '../../../models/user';
 import { dir, error } from 'console';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BookService } from '../../../core/services/book.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class UserDetails implements OnInit {
   public userBooks: Book[] = [];
   public filteredBooks: Book[] = [];
   public currentUser: User | undefined = undefined;
+  private destroyRef = inject(DestroyRef);
 
   constructor(private userService: UserService,
     private bookService: BookService,
@@ -27,7 +29,11 @@ export class UserDetails implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe(params => {
       const userId = Number(params.get('id'));
       if (userId) {
         this.getUserById(userId);
@@ -38,7 +44,11 @@ export class UserDetails implements OnInit {
   }
 
   public getBooksByUser(userId: number): void {
-    this.userService.getBooksByUser(userId).subscribe({
+    this.userService.getBooksByUser(userId)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe({
       next: (response: Book[]) => {
         this.userBooks = response;
         this.filteredBooks = response;
@@ -51,7 +61,11 @@ export class UserDetails implements OnInit {
   }
 
   public getUserById(userId: number): void {
-    this.userService.getUserById(userId).subscribe({
+    this.userService.getUserById(userId)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe({
       next: (response: User) => {
         this.currentUser = response;
       },

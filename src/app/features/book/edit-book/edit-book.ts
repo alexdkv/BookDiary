@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BookService } from '../../../core/services/book.service';
 import { Book } from '../../../models/book';
@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { response } from 'express';
 import { error } from 'console';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-edit-book',
@@ -16,6 +18,7 @@ import { error } from 'console';
 export class EditBook implements OnInit {
   public bookToEdit: Book | undefined;
   private bookId: number = 0;
+  private destroyRef = inject(DestroyRef);
   bookStatus: string[] = [
     'READ',
     'WANT_TO_READ',
@@ -29,7 +32,11 @@ export class EditBook implements OnInit {
 
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
+    this.route.data
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe(data => {
       this.bookToEdit = data['book'];
     })
     this.bookId = this.bookToEdit!.id;
@@ -37,7 +44,11 @@ export class EditBook implements OnInit {
 
   public onEditBook(editForm: NgForm): void {
     const updatedBook = { ...this.bookToEdit, ...editForm.value };
-    this.bookService.updateBook(this.bookId, updatedBook).subscribe({
+    this.bookService.updateBook(this.bookId, updatedBook)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: (response => {
         console.log("Book updated!");
         editForm.reset;

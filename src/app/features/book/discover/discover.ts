@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { BookService } from '../../../core/services/book.service';
 import { Book } from '../../../models/book';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ShortenDescriptionPipe } from '../../../shared/pipes/shorten.pipe';
+import { takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-discover',
@@ -16,6 +18,7 @@ export class Discover implements OnInit {
 
   private books: Book[] = [];
   protected resultBooks: Book[] = [];
+  private destroyRef = inject(DestroyRef);
 
   constructor(private bookService: BookService) { }
 
@@ -24,7 +27,11 @@ export class Discover implements OnInit {
   }
 
   public getAllBooks(): void {
-    this.bookService.getAllBooks().subscribe({
+    this.bookService.getAllBooks()
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: (response: Book[]) => {
         this.books = response;
         this.resultBooks = response;

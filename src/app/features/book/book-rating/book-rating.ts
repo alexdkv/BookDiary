@@ -13,6 +13,7 @@ import { RatingStateService } from '../../../core/services/rating.state.service'
 export class BookRating implements OnInit {
     @Input({ required: true }) bookId!: number;
     @Input() readonly: boolean = false;
+    
 
     stars = [1, 2, 3, 4, 5];
     private ratingStateService = inject(RatingStateService)

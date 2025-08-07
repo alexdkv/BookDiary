@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BookService } from '../../../core/services/book.service';
 import { UserService } from '../../../core/services/user.service';
@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Book } from '../../../models/book';
 import { error } from 'console';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-add-book',
@@ -16,6 +17,7 @@ import { error } from 'console';
 })
 export class AddBook implements OnInit {
   private currentUser: User | undefined;
+  private destroyRef = inject(DestroyRef);
 
   bookStatus: string[] = [
     'READ',
@@ -30,7 +32,10 @@ export class AddBook implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap
+    .pipe(
+        takeUntilDestroyed(this.destroyRef),)
+        .subscribe(params => {
       const userId = Number(params.get('id'));
       if (userId) {
         this.getUserById(userId);
@@ -40,7 +45,11 @@ export class AddBook implements OnInit {
   }
 
   public getUserById(userId: number): void {
-    this.userService.getUserById(userId).subscribe({
+    this.userService.getUserById(userId)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: (response: User) => {
         this.currentUser = response;
       },
@@ -59,7 +68,11 @@ export class AddBook implements OnInit {
     };
     console.log(bookToAdd);
 
-    this.bookService.addBook(this.currentUser!.id, bookToAdd).subscribe({
+    this.bookService.addBook(this.currentUser!.id, bookToAdd)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: () => this.router.navigate(['/user', this.currentUser?.id]),
       error: error => {
         console.log(error.message);

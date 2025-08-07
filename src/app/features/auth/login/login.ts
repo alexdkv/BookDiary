@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -12,13 +13,18 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './login.css'
 })
 export class Login {
+  private destroyRef = inject(DestroyRef);
   constructor(private authService: AuthService, private router: Router){}
 
   protected loginFailedMessage: string | null = null;
 
   public onLogin(form: NgForm): void{
     const {email, password} = form.value;
-    this.authService.login(email, password).subscribe({
+    this.authService.login(email, password)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
         this.loginFailedMessage = null;

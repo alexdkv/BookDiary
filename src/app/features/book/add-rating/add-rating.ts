@@ -1,8 +1,9 @@
-import { Component, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit, Output } from '@angular/core';
 import { RatingService } from '../../../core/services/rating.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { EventEmitter } from 'stream';
 import { RatingStateService } from '../../../core/services/rating.state.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-add-rating',
@@ -18,6 +19,7 @@ export class AddRating implements OnInit {
   private authService = inject(AuthService);
   private ratingService = inject(RatingService);
   private ratingStateService = inject(RatingStateService);
+  private destroyRef = inject(DestroyRef);
 
   protected stars: number[] = [1, 2, 3, 4, 5];
   protected currentRating: number = 0;
@@ -35,7 +37,11 @@ export class AddRating implements OnInit {
     if (!this.userId) {
       return;
     }
-    this.ratingService.rateBook(this.bookId, this.userId, star).subscribe({
+    this.ratingService.rateBook(this.bookId, this.userId, star)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: () => {
         this.currentRating = star;
         this.userHasRated = true;
@@ -49,7 +55,11 @@ export class AddRating implements OnInit {
       return;
     }
 
-    this.ratingService.getUserRating(this.bookId, this.userId).subscribe({
+    this.ratingService.getUserRating(this.bookId, this.userId)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe({
       next: (rating: number) => {
         this.currentRating = rating;
         this.userHasRated = true;
@@ -59,26 +69,4 @@ export class AddRating implements OnInit {
     });
   }
 
-  // public rateBook(star: number): void {
-  //   console.log(this.userId);
-
-  //   if (this.readonly) {
-  //     return;
-  //   }
-  //   if (!this.bookId) {
-  //     return;
-  //   }
-  //   if (!this.userId) {
-  //     return;
-  //   }
-  //   this.ratingService.rateBook(this.bookId, this.userId, star).subscribe({
-  //     next: () => {
-  //       this.currentRating = star;
-  //       this.userHasRated = true;
-  //     },
-  //     error: () => {
-  //       alert('Couldnt submit rating');
-  //     }
-  //   })
-  // }
 }

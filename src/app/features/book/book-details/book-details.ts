@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { BookService } from '../../../core/services/book.service';
 import { Book } from '../../../models/book';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BookRating } from '../book-rating/book-rating';
 import { AuthService } from '../../../core/services/auth.service';
 import { AddRating } from '../add-rating/add-rating';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-book-details',
@@ -17,6 +18,7 @@ import { AddRating } from '../add-rating/add-rating';
 })
 export class BookDetails implements OnInit {
   public bookToShow: Book | undefined;
+  private destroyRef = inject(DestroyRef);
 
   constructor(private bookService: BookService,
     private route: ActivatedRoute,
@@ -25,11 +27,11 @@ export class BookDetails implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
+    this.route.data
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(data => {
       this.bookToShow = data['book'];
     })
 
   }
-
-
 }
