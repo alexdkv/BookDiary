@@ -1,4 +1,23 @@
-    <h1>Book Diary</h1>
+<div class="home-layout">
+  
+  <main class="main-content">
+    <section class="welcome">
+      <h1>📚 Welcome to Book Diary</h1>
+      <p>
+        Your personal reading companion - track your books, rate them, and discover your next favorite story.
+        Whether you’re a casual reader or a bookworm, Book Diary keeps your library organized and your passion alive.
+      </p>
+    </section>
+
+    @if (randomQuote) {
+    <section class="quote">
+      <blockquote>
+        “{{ randomQuote.quote }}”  
+        <span>—{{randomQuote.author}} </span>
+      </blockquote>
+    </section>
+    }
+    
 
     <div class="book-container">
     @for (book of books; track book.id) {
@@ -14,4 +33,14 @@
     </div>
     }
     </div>
-
+    
+    <section class="about">
+      <h2>📖 About Book Diary</h2>
+      <p>
+        Book Diary was created for readers by readers. Our mission is to provide a space where you can 
+        keep track of your reading journey, and explore new adventures.  
+        We believe that every book has the power to change you and we’re here to make sure you remember them all.
+      </p>
+    </section>
+  </main>
+</div>
