@@ -10,6 +10,7 @@
     max-width: 425px;
     margin: 0;
     background: none;
+    box-shadow: none;
 }
 
 
@@ -69,4 +70,11 @@
 
 .book-card a:hover{
     text-decoration: underline;
+}
+
+input.ng-valid {
+border-left: none; 
+}
+input.ng-invalid.ng-touched {
+border-left: none; 
 }

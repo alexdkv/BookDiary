@@ -17,6 +17,7 @@ export class Login {
   constructor(private authService: AuthService, private router: Router){}
 
   protected loginFailedMessage: string | null = null;
+  protected formSubmitted = false;
 
   public onLogin(form: NgForm): void{
     const {email, password} = form.value;

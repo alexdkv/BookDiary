@@ -4,17 +4,17 @@
 
         @if (loginFailedMessage) {
         <div class="erorr-message">
-            <p>{{loginFailedMessage}}</p>
+            <p class="error-message">{{loginFailedMessage}}</p>
         </div>
         }
 
         <div class="form-group ">
-            <label for="username">Email</label>
+            <label for="email">Email</label>
             <input type="email" name="email" id="email" #email="ngModel" class="form-control" required ngModel>
         </div>
         @if(email.invalid && email.touched ){
         <div alert alert-danger>
-            <p>Email is invalid!</p>
+            <p class="error-message">Email is invalid!</p>
         </div>
         }
 
@@ -26,7 +26,7 @@
         </div>
         @if(password.invalid && password.touched ){
         <div alert alert-danger>
-            <p>Password must be 5 characters at least!</p>
+            <p class="error-message">Password must be 5 characters at least!</p>
         </div>
         }
 
