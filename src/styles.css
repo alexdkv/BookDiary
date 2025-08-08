@@ -36,6 +36,15 @@ form h2 {
   margin-top: 0.25rem;
 }
 
+.no-books{
+  text-align: center;
+  padding: 30px;
+  font-size: 1.5rem;
+  color: #666;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
 label {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -107,3 +116,4 @@ a.router-link:hover {
 .footer a:hover {
   text-decoration: underline;
 }
+

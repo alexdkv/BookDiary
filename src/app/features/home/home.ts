@@ -1,14 +1,10 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { BookService } from '../../core/services/book.service';
-import { response } from 'express';
-import { error } from 'console';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {  HttpErrorResponse } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ShortenDescriptionPipe } from '../../shared/pipes/shorten.pipe';
-import { takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BookRating } from '../book/book-rating/book-rating';
 
 @Component({
   selector: 'app-home',

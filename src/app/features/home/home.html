@@ -18,8 +18,12 @@
     </section>
     }
     
-
-    <div class="book-container">
+    @if (books.length === 0) {
+        <div class="no-books">
+            <p>📚 Seems like our users haven't started filling their collection! Don't be afraid to be first.</p>
+        </div>
+    }@else {
+        <div class="book-container">
     @for (book of books; track book.id) {
     <div class="book-card">
         <img [src]="book.photoUrl" alt="Book cover" class="book-image">
@@ -33,6 +37,8 @@
     </div>
     }
     </div>
+    }
+    
     
     <section class="about">
       <h2>📖 About Book Diary</h2>
