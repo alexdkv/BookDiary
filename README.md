@@ -1,4 +1,5 @@
-📚 BookDiary – Full Stack SPA
+# 📚 BookDiary – Full Stack SPA
+
 BookDiary is a Single Page Application (SPA) for managing and tracking books you’ve read, are reading, or want to read.
 It is built with:
 
