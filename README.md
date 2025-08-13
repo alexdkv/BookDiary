@@ -28,7 +28,7 @@ Before running the project, make sure you have:
 
 Node.js (LTS version) & npm (comes with Node) – [Download](https://nodejs.org/)
 
-Java 17+ - [Download](https://adoptium.net/)
+Java 17+ - [Download](https://www.oracle.com/java/technologies/downloads/)
 
 Angular CLI – Install globally via: npm install -g @angular/cli
 
